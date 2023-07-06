@@ -2,6 +2,8 @@ package com.luv2code.aopdemo.dao;
 
 import com.luv2code.aopdemo.Account;
 
+import java.util.List;
+
 public interface AccountDAO {
     void addAccount(Account theAccount, boolean vip);
     boolean doWork();
@@ -12,4 +14,7 @@ public interface AccountDAO {
     String getServiceCode();
 
     void setServiceCode(String serviceCode);
+    List<Account> findAccounts();
+
+    List<Account> findAccounts(boolean tripWire);
 }
