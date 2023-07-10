@@ -17,20 +17,43 @@ public class AopdemoApplication {
 		SpringApplication.run(AopdemoApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner commandLineRunner(AccountDAO theAccountDAO, MembershipDAO theMembershipDAO, TrafficFortuneService theTrafficFortuneService){
+	public CommandLineRunner commandLineRunner(AccountDAO theAccountDAO,
+											   MembershipDAO theMembershipDAO,
+											   TrafficFortuneService theTrafficFortuneService){
 		return runner -> {
 //			demoTheBeforeAdvice(theAccountDAO, theMembershipDAO);
 //			demoTheAfterReturningAdvice(theAccountDAO);
 //			demoTheAfterThrowingAdvice(theAccountDAO);
 //			demoTheAfterAdvice(theAccountDAO);
-			demoTheAroundAdvice(theTrafficFortuneService);
+//			demoTheAroundAdvice(theTrafficFortuneService);
+//			demoTheAroundAdviceHandleException(theTrafficFortuneService);
+			demoTheAroundAdviceRethrowException(theTrafficFortuneService);
 		};
 	}
 
-	private void demoTheAroundAdvice(TrafficFortuneService theTrafficFortuneService) {
-		System.out.println("\n\nMain program: demoTheAroundAdvice");
+	private void demoTheAroundAdviceRethrowException(TrafficFortuneService theTrafficFortuneService) {
+		System.out.println("\nMain program: demoTheAroundAdviceRethrowException");
 		System.out.println("Calling getFortune()");
-		System.out.println("My fortune is: " + theTrafficFortuneService.getFortune());
+		boolean tripWire = true;
+		String data = theTrafficFortuneService.getFortune(tripWire);
+		System.out.println("My fortune is: " + data);
+		System.out.println("Finished");
+	}
+
+	private void demoTheAroundAdviceHandleException(TrafficFortuneService theTrafficFortuneService) {
+		System.out.println("\nMain program: demoTheAroundAdviceHandleException");
+		System.out.println("Calling getFortune()");
+		boolean tripWire = true;
+		String data = theTrafficFortuneService.getFortune(tripWire);
+		System.out.println("My fortune is: " + data);
+		System.out.println("Finished");
+	}
+
+	private void demoTheAroundAdvice(TrafficFortuneService theTrafficFortuneService) {
+		System.out.println("\nMain program: demoTheAroundAdvice");
+		System.out.println("Calling getFortune()");
+		String data = theTrafficFortuneService.getFortune();
+		System.out.println("My fortune is: " + data);
 		System.out.println("Finished");
 	}
 
